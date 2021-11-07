@@ -14,4 +14,7 @@ on this data , predicting UE location.
 
 
 
-![Example](/trajectories.png)
+![Graphs Example](/trajectories.png)
+
+
+![Data Example](/output.png)
