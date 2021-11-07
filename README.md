@@ -2,7 +2,7 @@
 
 This Generator uses actor pattern
 
-to generate UE location trajectories 
+to generate UE location trajectories (for 3gpp, 5G projects)
 
 with certain variations from day to day
 
