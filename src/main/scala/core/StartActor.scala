@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory
 
 import scala.collection.mutable.Buffer
 
+/**
+ * The start of the simulation
+ */
 object StartActor{
   def props(grid:ActorRef, registry:ActorRef): Props = Props(new StartActor(grid, registry))
 }

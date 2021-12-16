@@ -7,10 +7,10 @@ import scala.util.Random
 
 /**
  *
- * This object exists all the time the UeActor exists
+ * This object is present all the time the UeActor exists
  * It is created, when UeActor creates its profile
  * So all the data in the constructor / body of the object is the same for all days - those are constants
- *
+ * This object controls the time aspects of the UE movement
  *
  */
 case class UeTimeInfo(startTimestamp:Long,

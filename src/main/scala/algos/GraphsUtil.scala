@@ -11,6 +11,16 @@ import scala.util.Random
 
 //documentation
 //http://www.scala-graph.org/guides/core-traversing.html
+
+
+/**
+ * It is the other "face of grid" - GRAPH
+ * It is a way to use a special scala library to:
+ * -connect graph/grid nodes
+ * -calculate shortest paths
+ * -etc
+ */
+
 object GraphsUtil {
 
   val MaxWeight = 100

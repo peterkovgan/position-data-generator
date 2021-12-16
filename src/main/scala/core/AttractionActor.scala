@@ -9,6 +9,12 @@ import scala.collection.mutable
 import scala.util.Random
 
 
+/**
+ * Some places on the grid designated as attractions
+ * They are placed on the grid
+ * And the UE walks between them
+ */
+
 
 object AttractionActor{
   def props(id:Int, x:Int, y:Int, grid:ActorRef): Props = Props(new AttractionActor(id, x, y, grid))

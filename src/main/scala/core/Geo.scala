@@ -5,6 +5,11 @@ import com.typesafe.config.ConfigFactory
 
 import scala.collection.mutable._
 
+/**
+ * This class is to work with Seattle Map (see USA-Seattle_cells.csv)
+ * It is an optional functionality (and not final, but works)
+ *
+ */
 object Geo {
   val config = ConfigFactory.load
   val ob_wide = config.getInt("akka.geo.ob_wide") //must be odd - will define what is obstacle (the width/height without station that will be considered an obstacle)
@@ -16,6 +21,7 @@ object Geo {
   val obstaclesBuffer = new java.util.ArrayList[String]()
   val width = config.getInt("akka.geo.width")
   val height = config.getInt("akka.geo.height")
+  var fileName = config.getString("akka.geo.fileName")
   val cells = Array.ofDim[Int](width, height)
   val obstacles = Array.ofDim[Int](width, height)
   for (x <- 0 until width) {
@@ -37,18 +43,13 @@ object Geo {
 
 
   private def writeObstacles = {
-    //val writer = new BufferedWriter(new FileWriter("obstacles.csv"))
-    // writer.write("x,y\n")
     for (x <- 0 until width) {
       for (y <- 0 until height) {
         if (obstacles(x)(y) == 1) {
           obstaclesBuffer.add(x + "," + y)
-          //writer.write(x + "," + y + "\n")
         }
       }
     }
-    //writer.flush()
-    //writer.close
   }
 
   private def selectProvenAccessibleGNodeBs = { //not exactly, some may be isolated
@@ -69,7 +70,7 @@ object Geo {
 
 
   def readCsv = {
-    val bufferedSource = io.Source.fromFile("USA-Seattle_cells.csv")
+    val bufferedSource = io.Source.fromFile(fileName)
     var i = 0
     for (line <- bufferedSource.getLines) {
       val cols = line.split(",").map(_.trim)

@@ -4,6 +4,10 @@ import akka.actor.ActorRef
 import algos.CellUtil
 import scala.collection.mutable.Buffer
 
+
+/**
+ * Daily trip of UE stored here
+ */
 case class UeLog(ueActor: ActorRef, grid:ActorRef, ueId:Int, ueTimeInfo: UeTimeInfo) {
 
 

@@ -12,6 +12,12 @@ import java.util
 
 import core.Main.geoSummary
 
+/**
+ * The actor that represents a UE object
+ * It is having a profile , created on start
+ * This profile stores the 1-st day trip
+ * To do later some modifications from it
+ */
 object UeActor{
   def props(grid:ActorRef, registry:ActorRef, ueId:Int): Props = Props(new UeActor(grid, registry, ueId))
 }

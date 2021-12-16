@@ -15,6 +15,15 @@ import scala.collection.mutable
 import scala.collection.mutable.Buffer
 import scala.jdk.CollectionConverters._
 
+/**
+ * This is our grid maintaining actor
+ * It has a cells [][] array
+ * And a graph Tuple (graph, map)
+ * The graph is special object from the 3-d party lib
+ * The map is : key - vertex ID in the graph, value - cell id
+ *
+ * This class does a lot of path calculation logic for UEs, see what messages it receives..
+ */
 
 object GridActor {
   def props(): Props = Props(new GridActor)

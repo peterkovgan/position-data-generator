@@ -14,6 +14,12 @@ import scala.collection.mutable.Map
 import scala.collection.mutable.Buffer
 import scala.math.Ordering.Implicits.infixOrderingOps
 
+/**
+ * This actor triggered by evey UE, when the daily walk ends
+ * This actor collects daily data, prints it in CSV files
+ * This actor also re-initializes the grid (to make tomorrow grid look a bit different)
+ *
+ */
 object CycleManagerActor{
     def props(grid:ActorRef): Props = Props(new CycleManagerActor(grid))
 }
@@ -133,8 +139,8 @@ class CycleManagerActor(val grid:ActorRef) extends Actor{
               if(currentNumberOfUeReported==ueNumber){
                   currentNumberOfUeReported=0
                   daysCompleted+=1
+                  logger.info("Day "+daysCompleted+" finished")
                   if(daysCompleted < maxDays) {
-                    logger.info("Day "+daysCompleted+" finished")
                     grid ! ChangeGrid(Fluctuations(logsPerUe))
                   }
               }

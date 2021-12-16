@@ -7,6 +7,9 @@ import scalax.collection.edge.WUnDiEdge
 import scala.collection.mutable
 import scala.collection.mutable.Buffer
 
+/**
+ * The class responsible to create a short path
+ */
 case class ShortPathCreator(graph:Graph[Int,WUnDiEdge], cell1:Cell, cell2:Cell, map:mutable.Map[Int, Cell]) {
   val logger = LoggerFactory.getLogger("algos.ShortPathCreator")
 
@@ -26,7 +29,6 @@ case class ShortPathCreator(graph:Graph[Int,WUnDiEdge], cell1:Cell, cell2:Cell, 
             val secondVertex = element.toString.toInt
             val cellOption = map.get(secondVertex)
             if (cellOption.isDefined) {
-              //logger.info("Shortest Path Cell:"+cellOption.get.x+":"+ cellOption.get.y)
               pathElements.addOne((cellOption.get.x, cellOption.get.y))
             }
           }

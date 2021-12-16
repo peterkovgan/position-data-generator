@@ -8,6 +8,11 @@ import scala.collection.mutable
 import scala.collection.mutable.{Buffer, Map}
 import scala.util.Random
 
+/**
+ * This class is responsible to create trajectory fluctuations
+ * While UE walks the other day in some other manner
+ * It is placing obstacles on the original path, or create attractive ways in some grid areas
+ */
 object Fluctuations {
     def apply(logsPerUe: Map[ActorRef, Buffer[UeLog]]) = {
          new Fluctuations(logsPerUe)
