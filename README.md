@@ -1,21 +1,24 @@
 # position-data-generator
 
-This Generator uses actor pattern
 
-to generate UE location trajectories (for 3gpp, 5G projects)
+Tags: UE, 3GPP, UE Mobility, UE trajectories, NWDAF
 
-with certain variations from day to day
+This Generator generates UE location trajectories 
+
+(To emulate UE data for 3gpp, 5G projects)
+
+Data includes certain UE behaviour variations (time/space) from day to day.
+
+Variations could be controlled and changed.
 
 That is (for example) useful to generate
 
-fake AMF-like data and try to employ ML algorithm
-
-on this data , predicting UE location.
+fake AMF-UE-Location data in order to train/test ML algorithms, responsible for UE location prediction. 
 
 
-To configure see application conf..
+To configure: see application conf..
 
-To run  - run the Main object
+To run: run the Main object
 
 
 Example Trajectories:
