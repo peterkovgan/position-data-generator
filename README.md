@@ -18,7 +18,12 @@ To configure see application conf..
 To run  - run the Main object
 
 
+Example Trajectories:
+
 ![Graphs Example](/trajectories.png)
+
+
+Example Generated Data Output:
 
 
 ![Data Example](/output.png)
