@@ -30,3 +30,8 @@ Example Generated Data Output:
 
 
 ![Data Example](/output.png)
+
+
+Jupyter notebook to see the trajectories:
+
+UeMobility.ipynb
