@@ -52,7 +52,7 @@ case class UeTimeInfo(startTimestamp:Long,
               val map: mutable.Map[Int,Long] = mutable.Map.empty
               val randoms = new Random(System.currentTimeMillis())
               dailyAttractionsTimeSpentWithRandom.foreach { pair =>
-                    map.put(pair._1, pair._2._1 + randoms.nextLong(pair._2._2-pair._2._1))//some random between min and max
+                    map.put(pair._1, pair._2._1 /*+ randoms.nextLong(pair._2._2-pair._2._1)*/)//some random between min and max
               }
               map
          }
@@ -61,7 +61,10 @@ case class UeTimeInfo(startTimestamp:Long,
          def moveOneDay(day:Int): Unit ={
               currentVisited = 0
               currentTransportType = 0
-              dayStartTimestamp = startTimestamp+(day*MILLS_IN_24_HOURS) + random.nextInt(dailyStartUeFluctuationMinutes)*60*1000
+              if(dailyStartUeFluctuationMinutes>0)
+                   dayStartTimestamp = startTimestamp+(day*MILLS_IN_24_HOURS) + random.nextInt(dailyStartUeFluctuationMinutes)*60*1000
+              else
+                   dayStartTimestamp = startTimestamp+(day*MILLS_IN_24_HOURS)
               dailyAttractionsTimeSpentThisDayOnly = randomize(dailyAttractionsTimeSpentWithRandom)
          }
 

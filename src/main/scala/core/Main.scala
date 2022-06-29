@@ -22,7 +22,7 @@ object Main {
 
      val system = ActorSystem("DataGenerator")
      val config = ConfigFactory.load()
-     val byGeo = config.getBoolean("akka.geo.by_geo")
+     val byGeo  = config.getBoolean("akka.geo.by_geo")
 
      try {
 

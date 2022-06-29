@@ -7,8 +7,11 @@ project/plugins/project/
 .history
 .cache
 .lib/
+*.csv
+.idea/
 
 ### Scala ###
 *.class
 *.log
 
+*.bak

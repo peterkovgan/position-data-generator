@@ -31,6 +31,9 @@ class CycleManagerActor(val grid:ActorRef) extends Actor{
   val maxDays  = config.getInt("akka.experiment.days")
   val ueNumber = config.getInt("akka.ue.profiles")
   val oneFile  = config.getBoolean("akka.output.oneFile")
+  val timeSlotSize  = config.getInt("akka.time.slotSize")
+  val middleSlotSize  = config.getInt("akka.time.middleSlotSize")
+  val grossSlotSize   = config.getInt("akka.time.grossSlotSize")
 
 
   var currentNumberOfUeReported = 0
@@ -79,6 +82,10 @@ class CycleManagerActor(val grid:ActorRef) extends Actor{
   }
 
   def storeDayTrip(ueLog: UeLog, ue:ActorRef) = {
+     val first:LogElement = ueLog.allVisited.head
+     var time = first.locationTime //this one is changing
+     var dayStartTime = time; //this one is constant
+     var timeFromDayStart  = 0L;
      var daysCompleted = 1
      if(daysCompletedPerUe.contains(ue)){
          daysCompleted = daysCompletedPerUe.get(ue).get
@@ -86,8 +93,31 @@ class CycleManagerActor(val grid:ActorRef) extends Actor{
      val writer = new BufferedWriter(new FileWriter("day_"+daysCompleted + "_UE" + ueLog.ueId+ "_" + config.getString("akka.output.file")))
      daysCompleted+=1
      daysCompletedPerUe.put(ue, daysCompleted)
-     writer.write("attr,x,y,ueId,cell,timePeriod\n")
-     ueLog.allVisited.foreach(e=> writer.write(e.attractionId+","+e.x+","+e.y+","+e.ueId+","+e.cellId+","+e.locationTime+"\n"))
+     writer.write("attr,x,y,ueId,cell,timePeriod,timeCurrent,hour,minute,slot,mslot,gslot,from_day_start\n")
+     var cycle = 0
+     ueLog.allVisited.foreach(e=>{
+       if(cycle==0){
+         ;
+       }else{
+         time+=e.locationTime
+       }
+       cycle+=1
+       val date = new Date(time)
+       val  calendar = Calendar.getInstance()
+       calendar.setTime(date)
+       val hour   = calendar.get(Calendar.HOUR_OF_DAY)
+       val minute = calendar.get(Calendar.MINUTE)
+       val slot = (hour*60+minute)/timeSlotSize
+       val mslot = (hour*60+minute)/middleSlotSize;
+       val gslot = (hour*60+minute)/grossSlotSize;
+
+       if(cycle!=0){
+           timeFromDayStart = time - dayStartTime
+       }
+
+       writer.write(e.attractionId+","+e.x+","+e.y+","+e.ueId+","+e.cellId+","+e.locationTime+","+time+","+hour+","+minute+","+slot+","+mslot+","+gslot+","+ timeFromDayStart+"\n")
+     }
+     )
      writer.flush()
      writer.close
   }
